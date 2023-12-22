@@ -5,7 +5,9 @@
 /tmp
 /out-tsc
 /bazel-out
-
+*.js linguist-vendored
+*.css linguist-vendored
+*.html linguist-vendored
 # Node
 /node_modules
 npm-debug.log
