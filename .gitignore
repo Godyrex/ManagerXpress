@@ -1,10 +1,36 @@
-# Ignore node_modules directory
+# Node.js
 node_modules/
+npm-debug.log
 
-# Ignore compiled files and assets
-dist/
-src/assets/
+# Angular
+/dist/
+/*.js
+/*.js.map
+/*.css
+/*.css.map
 
-# Ignore temporary files
-.DS_Store
+# IDE files
+.idea/
 .vscode/
+
+# Compiled files
+*.compiled.js
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Package manager files
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+
+# Angular CLI configuration
+angular.json
