@@ -10,7 +10,9 @@
 /node_modules
 npm-debug.log
 yarn-error.log
-
+*.js linguist-vendored
+*.css linguist-vendored
+*.html linguist-vendored
 # IDEs and editors
 .idea/
 .project
