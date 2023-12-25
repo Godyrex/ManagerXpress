@@ -15,5 +15,6 @@ public interface UserTableService {
     UserData insertUserData(UserData userData);
 
     List<UserData> getUserDataByTableId(String tableId);
+    List<UserData> searchUserDataByTableIdAndData(String tableId,String searchData);
 }
 

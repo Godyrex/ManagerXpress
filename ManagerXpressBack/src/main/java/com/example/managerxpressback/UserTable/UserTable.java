@@ -1,7 +1,5 @@
 package com.example.managerxpressback.UserTable;
 
-import com.example.managerxpressback.User.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

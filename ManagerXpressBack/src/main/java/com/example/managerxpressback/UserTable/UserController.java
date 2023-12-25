@@ -1,7 +1,6 @@
 package com.example.managerxpressback.UserTable;
 
 import com.example.managerxpressback.UserData.UserData;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +54,12 @@ public class UserController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<List<UserData>> getUserDataByTableName(@PathVariable String tableId) {
         List<UserData> userDataList = userTableService.getUserDataByTableId(tableId);
+        return new ResponseEntity<>(userDataList, HttpStatus.OK);
+    }
+    @GetMapping("/search-data-by-table/{tableId}/{data}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
+    public ResponseEntity<List<UserData>> searchUserDataByTableName(@PathVariable String tableId,@PathVariable String data) {
+        List<UserData> userDataList = userTableService.searchUserDataByTableIdAndData(tableId,data);
         return new ResponseEntity<>(userDataList, HttpStatus.OK);
     }
 }

@@ -5,14 +5,12 @@ import com.example.managerxpressback.Security.Services.UserDetailsServiceImpl;
 import com.example.managerxpressback.UserData.UserData;
 import com.example.managerxpressback.UserData.UserDataRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -80,5 +78,22 @@ public class UserTableServiceImpl implements UserTableService {
         return userDataRepository.findByIdTable(tableId);
 
     }
+
+    @Override
+    public List<UserData> searchUserDataByTableIdAndData(String tableId, String searchData) {
+        validateUserTableOwnership(tableId);
+        List<UserData> userDataList = userDataRepository.findByIdTable(tableId);
+
+        // Filter the list based on the partial match of searchData in the "data" map values
+        List<UserData> filteredUserData = userDataList.stream()
+                .filter(userData -> userData.getData().values().stream()
+                        .anyMatch(value -> value.toString().contains(searchData)))
+                .collect(Collectors.toList());
+
+        return filteredUserData;
+    }
+
+
+
 }
 
