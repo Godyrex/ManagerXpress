@@ -1,6 +1,7 @@
 package com.example.managerxpressback.UserTable;
 
 import com.example.managerxpressback.UserData.UserData;
+import com.example.managerxpressback.UserData.UserDataDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,13 +9,14 @@ import java.util.Optional;
 public interface UserTableService {
     UserTable createUserTable(UserTable userTable);
 
-    Optional<UserTable> getUserTableById(String tableId);
-    List<UserTable> getTablesByUser();
-    List<UserTable> getAllUsersTables();
+    Optional<UserTableDTO> getUserTableById(String tableId);
+    List<UserTableDTO> getTablesByUser();
+    List<UserTableDTO> getAllUsersTables();
 
     UserData insertUserData(UserData userData);
 
-    List<UserData> getUserDataByTableId(String tableId);
-    List<UserData> searchUserDataByTableIdAndData(String tableId,String searchData);
+    List<UserDataDTO> getUserDataByTableId(String tableId);
+    List<UserDataDTO> searchUserDataByTableIdAndData(String tableId,String searchData);
+     UserTable validateUserTableOwnership(String tableId);
 }
 

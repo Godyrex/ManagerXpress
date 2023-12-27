@@ -1,6 +1,7 @@
 package com.example.managerxpressback.UserData;
 
 import com.example.managerxpressback.UserTable.UserTable;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class UserData {
     @Id
     private String idData;
+    @NotEmpty(message = "Data cannot be empty")
     private Map<String, Object> data;
     private String idTable;
     public boolean isValid(UserTable userTable) {

@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface UserTableRepository extends MongoRepository<UserTable, String> {
     List<UserTable> findUserTablesByIdUser(String IdUser);
+
 }
