@@ -25,6 +25,7 @@ jobs:
       run: mvn -B package --file ManagerXpressBack/pom.xml
 
     - name: Run Unit Tests
+      working-directory: ManagerXpressBack
       run: mvn test
 
     - name: Code Quality Checks
