@@ -35,6 +35,7 @@ jobs:
     - name: Build and Push Docker Image
       if: success()
       run: |
+        cd ManagerXpressBack/
         docker build -t oussemaouakad/managerxpress:latest .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push oussemaouakad/managerxpress:latest
