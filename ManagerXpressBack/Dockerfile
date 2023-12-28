@@ -1,17 +1,12 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17
-
-# Set the working directory in the container
+# Stage 1: Build the application
+FROM maven:3.8.3-openjdk-17 as build
 WORKDIR /app
+COPY ManagerXpressBack /app
+RUN mvn -B clean package
 
-COPY --from=build ManagerXpressBack/target/my-application.jar /app.jar
-
-# Expose the port that your application will run on
+# Stage 2: Create a minimal image with only the JAR file
+FROM openjdk:17
+WORKDIR /app
+COPY --from=build /app/target/my-application.jar /app.jar
 EXPOSE 8080
-
-# Define environment variables
-ENV JAVA_OPTS=""
-ENV SPRING_PROFILES_ACTIVE=""
-
-# Run the application when the container starts
-CMD ["java", "-jar", "your-application.jar"]
+CMD ["java", "-jar", "app.jar"]
