@@ -1,38 +1,31 @@
-# Node.js
-node_modules/
-npm-debug.log
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-# Angular
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
 /dist/
-/*.js
-/*.js.map
-/*.css
-/*.css.map
-/*.json
-/*.pack
+/nbdist/
+/.nb-gradle/
+build/
 
-# IDE files
-.idea/
+### VS Code ###
 .vscode/
-
-# Compiled files
-*.compiled.js
-
-# Logs and databases
-*.log
-*.sqlite
-*.db
-
-# OS-generated files
-.DS_Store
-Thumbs.db
-
-# Package manager files
-package-lock.json
-yarn.lock
-
-# Environment variables
-.env
-
-# Angular CLI configuration
-angular.json
