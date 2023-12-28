@@ -1,7 +1,7 @@
 # Stage 1: Build the application
 FROM maven:3.8.3-openjdk-17 as build
 WORKDIR /app
-COPY ManagerXpressBack /app
+COPY . /app
 RUN mvn -B clean package
 
 # Stage 2: Create a minimal image with only the JAR file
