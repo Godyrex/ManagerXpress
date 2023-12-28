@@ -32,6 +32,7 @@ jobs:
       working-directory: ManagerXpressBack
       run: mvn verify
     - name: Code Analysis
+      working-directory: ManagerXpressBack
       run: mvn sonar:sonar
       if: success()
 
