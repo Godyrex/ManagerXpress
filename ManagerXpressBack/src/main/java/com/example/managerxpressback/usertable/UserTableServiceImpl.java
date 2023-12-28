@@ -1,11 +1,7 @@
-package com.example.managerxpressback.UserTable;
+package com.example.managerxpressback.usertable;
 
-import com.example.managerxpressback.Security.Services.UserDetailsImpl;
-import com.example.managerxpressback.Security.Services.UserDetailsServiceImpl;
-import com.example.managerxpressback.UserData.UserData;
-import com.example.managerxpressback.UserData.UserDataDTO;
-import com.example.managerxpressback.UserData.UserDataDTOMapper;
-import com.example.managerxpressback.UserData.UserDataRepository;
+import com.example.managerxpressback.security.services.UserDetailsImpl;
+import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

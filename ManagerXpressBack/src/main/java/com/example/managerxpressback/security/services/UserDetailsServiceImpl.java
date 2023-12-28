@@ -1,7 +1,7 @@
-package com.example.managerxpressback.Security.Services;
+package com.example.managerxpressback.security.services;
 
-import com.example.managerxpressback.User.User;
-import com.example.managerxpressback.User.UserRepository;
+import com.example.managerxpressback.user.User;
+import com.example.managerxpressback.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.example.managerxpressback.UserTable;
+package com.example.managerxpressback.usertable;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

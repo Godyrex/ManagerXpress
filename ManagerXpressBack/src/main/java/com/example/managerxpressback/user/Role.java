@@ -1,4 +1,4 @@
-package com.example.managerxpressback.User;
+package com.example.managerxpressback.user;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

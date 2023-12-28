@@ -1,6 +1,6 @@
-package com.example.managerxpressback.Security.jwt;
+package com.example.managerxpressback.security.jwt;
 
-import com.example.managerxpressback.Security.Services.UserDetailsServiceImpl;
+import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

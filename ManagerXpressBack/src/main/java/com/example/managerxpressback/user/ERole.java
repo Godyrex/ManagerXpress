@@ -1,4 +1,4 @@
-package com.example.managerxpressback.User;
+package com.example.managerxpressback.user;
 
 public enum ERole {
     ROLE_USER,

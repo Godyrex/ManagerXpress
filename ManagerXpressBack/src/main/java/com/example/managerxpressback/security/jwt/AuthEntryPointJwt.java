@@ -1,4 +1,4 @@
-package com.example.managerxpressback.Security.jwt;
+package com.example.managerxpressback.security.jwt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

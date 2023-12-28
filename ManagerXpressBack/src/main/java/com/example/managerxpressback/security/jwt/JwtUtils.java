@@ -1,6 +1,6 @@
-package com.example.managerxpressback.Security.jwt;
+package com.example.managerxpressback.security.jwt;
 
-import com.example.managerxpressback.Security.Services.UserDetailsImpl;
+import com.example.managerxpressback.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

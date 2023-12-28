@@ -1,8 +1,8 @@
-package com.example.managerxpressback.Security;
+package com.example.managerxpressback.security;
 
-import com.example.managerxpressback.Security.Services.UserDetailsServiceImpl;
-import com.example.managerxpressback.Security.jwt.AuthEntryPointJwt;
-import com.example.managerxpressback.Security.jwt.AuthTokenFilter;
+import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
+import com.example.managerxpressback.security.jwt.AuthEntryPointJwt;
+import com.example.managerxpressback.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

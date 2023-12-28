@@ -1,10 +1,6 @@
-package com.example.managerxpressback.UserTable;
-
-import com.example.managerxpressback.UserData.UserData;
-import com.example.managerxpressback.UserData.UserDataDTO;
+package com.example.managerxpressback.usertable;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserTableService {
     UserTable createUserTable(UserTable userTable);

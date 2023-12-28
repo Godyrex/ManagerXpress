@@ -1,6 +1,5 @@
-package com.example.managerxpressback.UserTable;
+package com.example.managerxpressback.usertable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

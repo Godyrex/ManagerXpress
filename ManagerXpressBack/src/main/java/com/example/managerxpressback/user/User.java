@@ -1,4 +1,4 @@
-package com.example.managerxpressback.User;
+package com.example.managerxpressback.user;
 
 
 import jakarta.validation.constraints.Email;

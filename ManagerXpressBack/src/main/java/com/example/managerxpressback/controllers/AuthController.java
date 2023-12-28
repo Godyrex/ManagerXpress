@@ -1,8 +1,8 @@
 package com.example.managerxpressback.controllers;
 
-import com.example.managerxpressback.Security.Services.UserDetailsImpl;
-import com.example.managerxpressback.Security.jwt.JwtUtils;
-import com.example.managerxpressback.User.*;
+import com.example.managerxpressback.security.services.UserDetailsImpl;
+import com.example.managerxpressback.security.jwt.JwtUtils;
+import com.example.managerxpressback.user.*;
 import com.example.managerxpressback.payload.request.LoginRequest;
 import com.example.managerxpressback.payload.request.SignupRequest;
 import com.example.managerxpressback.payload.response.JwtResponse;

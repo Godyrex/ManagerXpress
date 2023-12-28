@@ -1,6 +1,6 @@
-package com.example.managerxpressback.Security.Services;
+package com.example.managerxpressback.security.services;
 
-import com.example.managerxpressback.User.User;
+import com.example.managerxpressback.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

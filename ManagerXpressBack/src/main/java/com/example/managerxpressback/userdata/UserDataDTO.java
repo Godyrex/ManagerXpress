@@ -1,4 +1,4 @@
-package com.example.managerxpressback.UserData;
+package com.example.managerxpressback.userdata;
 
 import java.util.Map;
 

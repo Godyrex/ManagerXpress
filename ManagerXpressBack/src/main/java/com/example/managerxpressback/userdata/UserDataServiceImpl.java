@@ -1,9 +1,7 @@
-package com.example.managerxpressback.UserData;
+package com.example.managerxpressback.userdata;
 
-import com.example.managerxpressback.UserTable.UserTable;
-import com.example.managerxpressback.UserTable.UserTableDTOMapper;
-import com.example.managerxpressback.UserTable.UserTableRepository;
-import com.example.managerxpressback.UserTable.UserTableService;
+import com.example.managerxpressback.usertable.UserTable;
+import com.example.managerxpressback.usertable.UserTableService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

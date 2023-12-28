@@ -1,4 +1,4 @@
-package com.example.managerxpressback.UserTable;
+package com.example.managerxpressback.usertable;
 
 import java.util.List;
 import java.util.Map;

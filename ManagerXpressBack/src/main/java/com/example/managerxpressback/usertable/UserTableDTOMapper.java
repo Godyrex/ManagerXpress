@@ -1,4 +1,4 @@
-package com.example.managerxpressback.UserTable;
+package com.example.managerxpressback.usertable;
 
 import org.springframework.stereotype.Service;
 
