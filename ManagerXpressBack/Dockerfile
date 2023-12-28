@@ -4,8 +4,7 @@ FROM openjdk:17
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the application JAR file into the container at /app
-COPY ManagerXpressBack/target/ManagerXpressBack-0.0.1-SNAPSHOT.jar /app/
+COPY --from=build ManagerXpressBack/target/my-application.jar /app.jar
 
 # Expose the port that your application will run on
 EXPOSE 8080
