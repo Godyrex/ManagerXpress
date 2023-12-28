@@ -1,6 +1,7 @@
 package com.example.managerxpressback.UserData;
 
 import com.example.managerxpressback.UserTable.UserTable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

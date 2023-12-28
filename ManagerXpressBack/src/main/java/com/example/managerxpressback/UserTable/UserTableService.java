@@ -8,15 +8,12 @@ import java.util.Optional;
 
 public interface UserTableService {
     UserTable createUserTable(UserTable userTable);
-
-    Optional<UserTableDTO> getUserTableById(String tableId);
+    UserTable addUserToTable(String idUser,String idTable);
+    UserTable removeUserFromTable(String idUser,String idTable);
+    UserTableDTO getUserTableById(String tableId);
     List<UserTableDTO> getTablesByUser();
+    List<UserTableDTO> getTablesByAddedUser();
     List<UserTableDTO> getAllUsersTables();
-
-    UserData insertUserData(UserData userData);
-
-    List<UserDataDTO> getUserDataByTableId(String tableId);
-    List<UserDataDTO> searchUserDataByTableIdAndData(String tableId,String searchData);
      UserTable validateUserTableOwnership(String tableId);
 }
 
