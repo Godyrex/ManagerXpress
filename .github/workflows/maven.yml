@@ -29,6 +29,7 @@ jobs:
       run: mvn test
 
     - name: Code Quality Checks
+      working-directory: ManagerXpressBack
       run: mvn verify
 
     - name: Build and Push Docker Image
