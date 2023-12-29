@@ -12,12 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "user_table")
-public class UserTable {
+public class EUserTable {
     @Id
     private String idTable;
     private String idUser;

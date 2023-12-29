@@ -1,6 +1,6 @@
 package com.example.managerxpressback.userdata;
 
-import com.example.managerxpressback.usertable.UserTable;
+import com.example.managerxpressback.usertable.EUserTable;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,18 +10,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "user_data")
-public class UserData {
+public class EUserData {
     @Id
     private String idData;
     @NotEmpty(message = "Data cannot be empty")
     private Map<String, Object> data;
     private String idTable;
-    public boolean isValid(UserTable userTable) {
-        return userTable.getColumns().keySet().containsAll(data.keySet());
+
+    public boolean isValid(EUserTable eUserTable) {
+        return eUserTable.getColumns().keySet().containsAll(data.keySet());
     }
 }

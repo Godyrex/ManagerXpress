@@ -1,6 +1,6 @@
 package com.example.managerxpressback.security.services;
 
-import com.example.managerxpressback.user.User;
+import com.example.managerxpressback.user.EUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,16 +34,16 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
+    public static UserDetailsImpl build(EUser eUser) {
+        List<GrantedAuthority> authorities = eUser.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
+                eUser.getId(),
+                eUser.getUsername(),
+                eUser.getEmail(),
+                eUser.getPassword(),
                 authorities);
     }
 

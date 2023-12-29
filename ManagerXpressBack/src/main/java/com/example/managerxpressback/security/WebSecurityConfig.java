@@ -1,8 +1,9 @@
 package com.example.managerxpressback.security;
 
-import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
 import com.example.managerxpressback.security.jwt.AuthEntryPointJwt;
 import com.example.managerxpressback.security.jwt.AuthTokenFilter;
+import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,11 +24,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //(securedEnabled = true,
 //jsr250Enabled = true,
 //prePostEnabled = true) // by default
-public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
-    @Autowired
+@AllArgsConstructor
+public class WebSecurityConfig {
     UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean

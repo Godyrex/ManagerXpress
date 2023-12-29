@@ -19,14 +19,14 @@ public class UserTableServiceImpl implements UserTableService {
     private final UserTableDTOMapper userTableDTOMapper;
 
     @Override
-    public UserTable validateUserTableOwnership(String tableId) {
+    public EUserTable validateUserTableOwnership(String tableId) {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
-        Optional<UserTable> userTableOptional = userTableRepository.findById(tableId);
+        Optional<EUserTable> userTableOptional = userTableRepository.findById(tableId);
 
         if (userTableOptional.isPresent()) {
-            UserTable userTable = userTableOptional.get();
-            if (Objects.equals(userTable.getIdUser(), userDetails.getId())|| userTable.getUsers().contains(userDetails.getId())) {
-                return userTable;
+            EUserTable eUserTable = userTableOptional.get();
+            if (Objects.equals(eUserTable.getIdUser(), userDetails.getId()) || eUserTable.getUsers().contains(userDetails.getId())) {
+                return eUserTable;
             } else {
                 throw new IllegalArgumentException("Table doesn't belong to the user");
             }
@@ -34,56 +34,56 @@ public class UserTableServiceImpl implements UserTableService {
             throw new IllegalArgumentException("UserTable not found for ID: " + tableId);
         }
     }
+
     @Override
-    public UserTable createUserTable(UserTable userTable) {
+    public EUserTable createUserTable(EUserTable eUserTable) {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
-        userTable.setIdUser(userDetails.getId());
-        return userTableRepository.save(userTable);
+        eUserTable.setIdUser(userDetails.getId());
+        return userTableRepository.save(eUserTable);
     }
 
     @Override
-    public UserTable addUserToTable(String idUser, String idTable) {
-        UserTable userTable = validateUserTableOwnership(idTable);
+    public EUserTable addUserToTable(String idUser, String idTable) {
+        EUserTable eUserTable = validateUserTableOwnership(idTable);
 
-        if (userTable != null) {
-            if(userTable.getUsers() != null) {
-                if(!userTable.getUsers().contains(idUser)) {
-                    userTable.getUsers().add(idUser);
-                    return userTableRepository.save(userTable);
-                }else{
+        if (eUserTable != null) {
+            if (eUserTable.getUsers() != null) {
+                if (!eUserTable.getUsers().contains(idUser)) {
+                    eUserTable.getUsers().add(idUser);
+                    return userTableRepository.save(eUserTable);
+                } else {
                     return null;
                 }
-            }else{
-                List<String> users=new ArrayList<>();
+            } else {
+                List<String> users = new ArrayList<>();
                 users.add(idUser);
-                userTable.setUsers(users);
-                return userTableRepository.save(userTable);
+                eUserTable.setUsers(users);
+                return userTableRepository.save(eUserTable);
             }
         } else {
             return null;
         }
     }
-    @Override
-    public UserTable removeUserFromTable(String idUser, String idTable) {
-        UserTable userTable = validateUserTableOwnership(idTable);
 
-        if (userTable != null) {
-            userTable.getUsers().remove(idUser);
-            return userTableRepository.save(userTable);
+    @Override
+    public EUserTable removeUserFromTable(String idUser, String idTable) {
+        EUserTable eUserTable = validateUserTableOwnership(idTable);
+
+        if (eUserTable != null) {
+            eUserTable.getUsers().remove(idUser);
+            return userTableRepository.save(eUserTable);
         } else {
             return null;
         }
     }
 
 
-
     @Override
     public UserTableDTO getUserTableById(String tableId) {
-        UserTable userTable = validateUserTableOwnership(tableId);
-        if(userTable != null){
-            UserTableDTO userTableDTO = userTableDTOMapper.apply(userTable);
-            return userTableDTO;
-        }else {
+        EUserTable eUserTable = validateUserTableOwnership(tableId);
+        if (eUserTable != null) {
+            return userTableDTOMapper.apply(eUserTable);
+        } else {
             return null;
         }
     }
@@ -93,6 +93,7 @@ public class UserTableServiceImpl implements UserTableService {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
         return userTableRepository.findUserTablesByIdUser(userDetails.getId()).stream().map(userTableDTOMapper).collect(Collectors.toList());
     }
+
     @Override
     public List<UserTableDTO> getTablesByAddedUser() {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
@@ -103,8 +104,6 @@ public class UserTableServiceImpl implements UserTableService {
     public List<UserTableDTO> getAllUsersTables() {
         return userTableRepository.findAll().stream().map(userTableDTOMapper).collect(Collectors.toList());
     }
-
-
 
 
 }

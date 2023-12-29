@@ -8,5 +8,5 @@ public record UserTableDTO(
         String tableName,
         Map<String, String> columns,
         List<String> Users
-        ) {
+) {
 }

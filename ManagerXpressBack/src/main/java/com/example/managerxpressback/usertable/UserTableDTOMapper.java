@@ -3,15 +3,16 @@ package com.example.managerxpressback.usertable;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
+
 @Service
-public class UserTableDTOMapper implements Function<UserTable,UserTableDTO> {
+public class UserTableDTOMapper implements Function<EUserTable, UserTableDTO> {
     @Override
-    public UserTableDTO apply(UserTable userTable) {
+    public UserTableDTO apply(EUserTable eUserTable) {
         return new UserTableDTO(
-                userTable.getIdUser(),
-                userTable.getTableName(),
-                userTable.getColumns(),
-                userTable.getUsers()
+                eUserTable.getIdUser(),
+                eUserTable.getTableName(),
+                eUserTable.getColumns(),
+                eUserTable.getUsers()
         );
     }
 }

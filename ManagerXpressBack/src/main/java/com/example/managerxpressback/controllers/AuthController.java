@@ -1,13 +1,14 @@
 package com.example.managerxpressback.controllers;
 
-import com.example.managerxpressback.security.services.UserDetailsImpl;
-import com.example.managerxpressback.security.jwt.JwtUtils;
-import com.example.managerxpressback.user.*;
 import com.example.managerxpressback.payload.request.LoginRequest;
 import com.example.managerxpressback.payload.request.SignupRequest;
 import com.example.managerxpressback.payload.response.JwtResponse;
 import com.example.managerxpressback.payload.response.MessageResponse;
+import com.example.managerxpressback.security.jwt.JwtUtils;
+import com.example.managerxpressback.security.services.UserDetailsImpl;
+import com.example.managerxpressback.user.*;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,23 +23,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AuthController {
-    @Autowired
     AuthenticationManager authenticationManager;
 
-    @Autowired
     UserRepository userRepository;
 
-    @Autowired
     RoleRepository roleRepository;
 
-    @Autowired
     PasswordEncoder encoder;
 
-    @Autowired
     JwtUtils jwtUtils;
 
     @PostMapping("/signin")
@@ -65,20 +62,20 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
+        EUser eUser = new EUser(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
@@ -112,8 +109,8 @@ public class AuthController {
             });
         }
 
-        user.setRoles(roles);
-        userRepository.save(user);
+        eUser.setRoles(roles);
+        userRepository.save(eUser);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

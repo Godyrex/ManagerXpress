@@ -12,10 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Getter
 @Setter
 @Document(collection = "users")
-public class User {
+public class EUser {
     @Id
     private String id;
     @NotBlank
@@ -32,10 +33,10 @@ public class User {
     @DBRef
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
+    public EUser() {
     }
 
-    public User(String username, String email, String password) {
+    public EUser(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;

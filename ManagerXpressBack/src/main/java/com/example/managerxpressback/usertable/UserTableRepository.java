@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserTableRepository extends MongoRepository<UserTable, String> {
-    List<UserTable> findUserTablesByIdUser(String IdUser);
-    List<UserTable> findUserTablesByUsersContaining(String IdUser);
+public interface UserTableRepository extends MongoRepository<EUserTable, String> {
+    List<EUserTable> findUserTablesByIdUser(String idUser);
+
+    List<EUserTable> findUserTablesByUsersContaining(String idUser);
 }

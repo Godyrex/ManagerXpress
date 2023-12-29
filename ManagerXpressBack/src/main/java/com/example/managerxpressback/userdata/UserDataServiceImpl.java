@@ -1,24 +1,26 @@
 package com.example.managerxpressback.userdata;
 
-import com.example.managerxpressback.usertable.UserTable;
+import com.example.managerxpressback.usertable.EUserTable;
 import com.example.managerxpressback.usertable.UserTableService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
-public class UserDataServiceImpl implements UserDataService{
+public class UserDataServiceImpl implements UserDataService {
     private final UserTableService userTableService;
     private final UserDataRepository userDataRepository;
     private final UserDataDTOMapper userDataDTOMapper;
-    @Override
-    public UserData insertUserData(UserData userData) {
-        UserTable userTable = userTableService.validateUserTableOwnership(userData.getIdTable());
 
-        if (userData.isValid(userTable)) {
-            return userDataRepository.save(userData);
+    @Override
+    public EUserData insertUserData(EUserData eUserData) {
+        EUserTable eUserTable = userTableService.validateUserTableOwnership(eUserData.getIdTable());
+
+        if (eUserData.isValid(eUserTable)) {
+            return userDataRepository.save(eUserData);
         } else {
             throw new IllegalArgumentException("Invalid columns in UserData. Must match UserTable columns.");
         }
@@ -37,14 +39,14 @@ public class UserDataServiceImpl implements UserDataService{
     @Override
     public List<UserDataDTO> searchUserDataByTableIdAndData(String tableId, String searchData) {
         userTableService.validateUserTableOwnership(tableId);
-        List<UserData> userDataList = userDataRepository.findByIdTable(tableId);
+        List<EUserData> eUserDataList = userDataRepository.findByIdTable(tableId);
 
         // Filter the list based on the partial match of searchData in the "data" map values
-        List<UserData> filteredUserData = userDataList.stream()
+        List<EUserData> filteredEUserData = eUserDataList.stream()
                 .filter(userData -> userData.getData().values().stream()
                         .anyMatch(value -> value.toString().contains(searchData)))
                 .collect(Collectors.toList());
 
-        return filteredUserData.stream().map(userDataDTOMapper).collect(Collectors.toList());
+        return filteredEUserData.stream().map(userDataDTOMapper).collect(Collectors.toList());
     }
 }
