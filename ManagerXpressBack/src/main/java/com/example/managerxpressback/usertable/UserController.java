@@ -26,16 +26,16 @@ public class UserController {
 
     @PostMapping("/create-table")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
-    public ResponseEntity<EUserTable> createUserTable(@Valid @RequestBody EUserTable eUserTable) {
-        EUserTable createdTable = userTableService.createUserTable(eUserTable);
+    public ResponseEntity<EUserTable> createUserTable(@Valid @RequestBody UserTableDTO userTableDTO) {
+        EUserTable createdTable = userTableService.createUserTable(userTableDTO);
         return new ResponseEntity<>(createdTable, HttpStatus.CREATED);
     }
 
-    @PutMapping("/assigne/{user}/To/{table}")
+    @PutMapping("/assign/{user}/To/{table}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
-    public ResponseEntity<EUserTable> assigneUserToTable(@PathVariable String user, @PathVariable String table) {
-        EUserTable assigneUser = userTableService.addUserToTable(user, table);
-        return new ResponseEntity<>(assigneUser, HttpStatus.CREATED);
+    public ResponseEntity<EUserTable> assignUserToTable(@PathVariable String user, @PathVariable String table) {
+        EUserTable assignUser = userTableService.addUserToTable(user, table);
+        return new ResponseEntity<>(assignUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/remove/{user}/From/{table}")
@@ -73,8 +73,8 @@ public class UserController {
 
     @PostMapping("/insert-data")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
-    public ResponseEntity<EUserData> insertUserData(@Valid @RequestBody EUserData eUserData) {
-        EUserData insertedData = userDataService.insertUserData(eUserData);
+    public ResponseEntity<EUserData> insertUserData(@Valid @RequestBody UserDataDTO userDataDTO) {
+        EUserData insertedData = userDataService.insertUserData(userDataDTO);
         return new ResponseEntity<>(insertedData, HttpStatus.CREATED);
     }
 

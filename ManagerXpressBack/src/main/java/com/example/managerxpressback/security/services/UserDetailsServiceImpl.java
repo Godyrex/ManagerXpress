@@ -3,7 +3,6 @@ package com.example.managerxpressback.security.services;
 import com.example.managerxpressback.user.EUser;
 import com.example.managerxpressback.user.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -26,4 +26,9 @@ public class EUserData {
     public boolean isValid(EUserTable eUserTable) {
         return eUserTable.getColumns().keySet().containsAll(data.keySet());
     }
+
+    public EUserData(Map<String, Object> data, String idTable) {
+        this.data = data;
+        this.idTable = idTable;
+    }
 }

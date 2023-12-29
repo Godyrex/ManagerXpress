@@ -29,4 +29,9 @@ public class EUserTable {
     @NotEmpty(message = "Columns cannot be empty")
     @Size(min = 1, message = "At least one column must be specified")
     private Map<String, String> columns;
+
+    public EUserTable(String tableName, Map<String, String> columns) {
+        this.tableName = tableName;
+        this.columns = columns;
+    }
 }

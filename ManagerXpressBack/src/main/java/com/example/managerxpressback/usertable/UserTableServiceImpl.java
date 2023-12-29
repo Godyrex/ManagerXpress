@@ -36,8 +36,9 @@ public class UserTableServiceImpl implements UserTableService {
     }
 
     @Override
-    public EUserTable createUserTable(EUserTable eUserTable) {
+    public EUserTable createUserTable(UserTableDTO userTableDTO) {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
+        EUserTable eUserTable = new EUserTable(userTableDTO.tableName(),userTableDTO.columns());
         eUserTable.setIdUser(userDetails.getId());
         return userTableRepository.save(eUserTable);
     }
@@ -91,18 +92,18 @@ public class UserTableServiceImpl implements UserTableService {
     @Override
     public List<UserTableDTO> getTablesByUser() {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
-        return userTableRepository.findUserTablesByIdUser(userDetails.getId()).stream().map(userTableDTOMapper).collect(Collectors.toList());
+        return userTableRepository.findUserTablesByIdUser(userDetails.getId()).stream().map(userTableDTOMapper).toList();
     }
 
     @Override
     public List<UserTableDTO> getTablesByAddedUser() {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
-        return userTableRepository.findUserTablesByUsersContaining(userDetails.getId()).stream().map(userTableDTOMapper).collect(Collectors.toList());
+        return userTableRepository.findUserTablesByUsersContaining(userDetails.getId()).stream().map(userTableDTOMapper).toList();
     }
 
     @Override
     public List<UserTableDTO> getAllUsersTables() {
-        return userTableRepository.findAll().stream().map(userTableDTOMapper).collect(Collectors.toList());
+        return userTableRepository.findAll().stream().map(userTableDTOMapper).toList();
     }
 
 

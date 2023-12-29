@@ -16,9 +16,9 @@ public class UserDataServiceImpl implements UserDataService {
     private final UserDataDTOMapper userDataDTOMapper;
 
     @Override
-    public EUserData insertUserData(EUserData eUserData) {
-        EUserTable eUserTable = userTableService.validateUserTableOwnership(eUserData.getIdTable());
-
+    public EUserData insertUserData(UserDataDTO userDataDTO) {
+        EUserTable eUserTable = userTableService.validateUserTableOwnership(userDataDTO.idTable());
+        EUserData eUserData = new EUserData(userDataDTO.data(),userDataDTO.idTable());
         if (eUserData.isValid(eUserTable)) {
             return userDataRepository.save(eUserData);
         } else {
@@ -31,7 +31,7 @@ public class UserDataServiceImpl implements UserDataService {
         userTableService.validateUserTableOwnership(tableId);
         return userDataRepository.findByIdTable(tableId).stream()
                 .map(userDataDTOMapper)
-                .collect(Collectors.toList());
+                .toList();
 
 
     }
@@ -45,8 +45,8 @@ public class UserDataServiceImpl implements UserDataService {
         List<EUserData> filteredEUserData = eUserDataList.stream()
                 .filter(userData -> userData.getData().values().stream()
                         .anyMatch(value -> value.toString().contains(searchData)))
-                .collect(Collectors.toList());
+                .toList();
 
-        return filteredEUserData.stream().map(userDataDTOMapper).collect(Collectors.toList());
+        return filteredEUserData.stream().map(userDataDTOMapper).toList();
     }
 }
