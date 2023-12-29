@@ -29,3 +29,5 @@ build/
 ### VS Code ###
 .vscode/
 ManagerXpressBack/src/main/resources/application.properties
+*.properties
+ManagerXpressBack/src/main/resources/application.properties
