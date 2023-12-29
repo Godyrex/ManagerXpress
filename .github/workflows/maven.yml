@@ -49,7 +49,7 @@ jobs:
 
     - name: Generate Code Coverage Report
       working-directory: ManagerXpressBack
-      run: mvn jacoco:report
+      run: mvn jacoco:report -DdataFile=target/jacoco.exec
 
     - name: Build and analyze
       working-directory: ManagerXpressBack
