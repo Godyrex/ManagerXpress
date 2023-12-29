@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -34,4 +35,24 @@ public class EUserTable {
         this.tableName = tableName;
         this.columns = columns;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EUserTable that = (EUserTable) o;
+
+        // Add equality checks for relevant fields
+        return idTable.equals(that.idTable) &&
+                idUser.equals(that.idUser) &&
+                tableName.equals(that.tableName) &&
+                columns.equals(that.columns);
+    }
+
+    @Override
+    public int hashCode() {
+        // Generate hash code based on relevant fields
+        return Objects.hash(idTable, idUser, tableName, columns);
+    }
+
 }
