@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,4 +32,19 @@ public class EUserData {
         this.data = data;
         this.idTable = idTable;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EUserData that = (EUserData) o;
+        return Objects.equals(idData, that.idData) &&
+                Objects.equals(data, that.data) &&
+                Objects.equals(idTable, that.idTable);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idData, data, idTable);
+    }
+
 }
