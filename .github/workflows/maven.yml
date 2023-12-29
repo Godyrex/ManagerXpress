@@ -28,7 +28,8 @@ jobs:
     - name: Run Unit Tests
       working-directory: ManagerXpressBack
       run: mvn test
-
+    - name: List Target Directory
+      run: ls -R ManagerXpressBack/target
     - name: Code Quality Checks
       working-directory: ManagerXpressBack
       run: mvn verify
@@ -49,7 +50,7 @@ jobs:
 
     - name: Generate Code Coverage Report
       working-directory: ManagerXpressBack
-      run: mvn jacoco:report
+      run: mvn jacoco:report -DdataFile=target/jacoco.exec
 
     - name: Build and analyze
       working-directory: ManagerXpressBack
