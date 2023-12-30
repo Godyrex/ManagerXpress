@@ -4,8 +4,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.util.Set;
-
 
 public class SignupRequest {
     @NotBlank
@@ -16,7 +14,6 @@ public class SignupRequest {
     @Email
     private String email;
 
-    private Set<String> roles;
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
@@ -45,11 +42,4 @@ public class SignupRequest {
         this.password = password;
     }
 
-    public Set<String> getRoles() {
-        return this.roles;
-    }
-
-    public void setRole(Set<String> roles) {
-        this.roles = roles;
-    }
 }
