@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('ADMIN') or hasRole('USER') or hasRole('MODERATOR')")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @AllArgsConstructor
 public class UserController {
@@ -28,35 +28,30 @@ public class UserController {
     private UserDataService userDataService;
 
     @PostMapping("/create-table")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<EUserTable> createUserTable(@Valid @RequestBody UserTableDTO userTableDTO) {
         EUserTable createdTable = userTableService.createUserTable(userTableDTO);
         return new ResponseEntity<>(createdTable, HttpStatus.CREATED);
     }
 
     @PutMapping("/assign/{user}/To/{table}")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<EUserTable> assignUserToTable(@PathVariable String user, @PathVariable String table) {
         EUserTable assignUser = userTableService.addUserToTable(user, table);
-        return new ResponseEntity<>(assignUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(assignUser, HttpStatus.OK);
     }
 
     @PutMapping("/remove/{user}/From/{table}")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<EUserTable> removeUserFromTable(@PathVariable String user, @PathVariable String table) {
         EUserTable removeUser = userTableService.removeUserFromTable(user, table);
-        return new ResponseEntity<>(removeUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(removeUser, HttpStatus.OK);
     }
 
     @GetMapping("/get-table/{tableId}")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<UserTableDTO> getUserTableById(@PathVariable String tableId) {
         UserTableDTO userTable = userTableService.getUserTableById(tableId);
         return new ResponseEntity<>(userTable, HttpStatus.OK);
     }
 
     @GetMapping("/get-assigned-user-tables")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<List<UserTableDTO>> getAllAssignedUserTables() {
         List<UserTableDTO> userTables = userTableService.getTablesByAddedUser();
         return new ResponseEntity<>(userTables, HttpStatus.OK);
@@ -68,28 +63,20 @@ public class UserController {
         return new ResponseEntity<>(userTables, HttpStatus.OK);
     }
 
-    @GetMapping("/get-all-tables")
-    public ResponseEntity<List<UserTableDTO>> getAllUsersTables() {
-        List<UserTableDTO> userTables = userTableService.getAllUsersTables();
-        return new ResponseEntity<>(userTables, HttpStatus.OK);
-    }
 
     @PostMapping("/insert-data")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<EUserData> insertUserData(@Valid @RequestBody UserDataDTO userDataDTO) {
         EUserData insertedData = userDataService.insertUserData(userDataDTO);
         return new ResponseEntity<>(insertedData, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-data-by-table/{tableId}")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<List<UserDataDTO>> getUserDataByTableName(@PathVariable String tableId) {
         List<UserDataDTO> userDataList = userDataService.getUserDataByTableId(tableId);
         return new ResponseEntity<>(userDataList, HttpStatus.OK);
     }
 
     @GetMapping("/search-data-by-table/{tableId}/{data}")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR')")
     public ResponseEntity<List<UserDataDTO>> searchUserDataByTableName(@PathVariable String tableId, @PathVariable String data) {
         List<UserDataDTO> userDataList = userDataService.searchUserDataByTableIdAndData(tableId, data);
         return new ResponseEntity<>(userDataList, HttpStatus.OK);

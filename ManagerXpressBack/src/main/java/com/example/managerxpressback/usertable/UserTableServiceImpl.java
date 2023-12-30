@@ -1,5 +1,7 @@
 package com.example.managerxpressback.usertable;
 
+import com.example.managerxpressback.exceptions.InvalidTableException;
+import com.example.managerxpressback.exceptions.TableNotFoundException;
 import com.example.managerxpressback.security.services.UserDetailsImpl;
 import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
@@ -27,10 +29,10 @@ public class UserTableServiceImpl implements UserTableService {
             if (Objects.equals(eUserTable.getIdUser(), userDetails.getId()) || eUserTable.getUsers().contains(userDetails.getId())) {
                 return eUserTable;
             } else {
-                throw new IllegalArgumentException("Table doesn't belong to the user");
+                throw new InvalidTableException("Table doesn't belong to the user");
             }
         } else {
-            throw new IllegalArgumentException("UserTable not found for ID: " + tableId);
+            throw new TableNotFoundException("UserTable not found for ID: " + tableId);
         }
     }
 

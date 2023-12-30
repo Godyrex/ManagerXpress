@@ -1,5 +1,6 @@
 package com.example.managerxpressback.userdata;
 
+import com.example.managerxpressback.exceptions.InvalidColumnsException;
 import com.example.managerxpressback.usertable.EUserTable;
 import com.example.managerxpressback.usertable.UserTableService;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class UserDataServiceImpl implements UserDataService {
         if (eUserData.isValid(eUserTable)) {
             return userDataRepository.save(eUserData);
         } else {
-            throw new IllegalArgumentException("Invalid columns in UserData. Must match UserTable columns.");
+            throw new InvalidColumnsException("Invalid columns in UserData. Must match UserTable columns.");
         }
     }
 
