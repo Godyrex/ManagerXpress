@@ -1,8 +1,11 @@
-package com.example.managerxpressback.usertable;
+package com.example.managerxpressback.controllers;
 
 import com.example.managerxpressback.userdata.EUserData;
 import com.example.managerxpressback.userdata.UserDataDTO;
 import com.example.managerxpressback.userdata.UserDataService;
+import com.example.managerxpressback.usertable.EUserTable;
+import com.example.managerxpressback.usertable.UserTableDTO;
+import com.example.managerxpressback.usertable.UserTableService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
