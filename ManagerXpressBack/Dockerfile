@@ -14,6 +14,6 @@ RUN apt-get update && \
     apt-get install -y redis-server
 
 EXPOSE 8080
-EXPOSE 6379  # Expose Redis port
+EXPOSE 6379
 
 CMD ["java", "-jar", "app.jar"]
