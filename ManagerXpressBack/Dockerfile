@@ -10,10 +10,12 @@ WORKDIR /app
 COPY --from=build /app/target/ManagerXpressBack-0.0.1-SNAPSHOT.jar /app.jar
 
 # Install Redis
-RUN apt-get update && \
-    apt-get install -y redis-server
+RUN apt update && \
+    apt install -y redis-server
 
+# Expose ports
 EXPOSE 8080
 EXPOSE 6379
 
+# CMD
 CMD ["java", "-jar", "app.jar"]
