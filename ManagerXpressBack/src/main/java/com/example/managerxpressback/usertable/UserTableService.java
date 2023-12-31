@@ -10,11 +10,9 @@ public interface UserTableService {
     EUserTable removeUserFromTable(String idUser, String idTable);
 
     UserTableDTO getUserTableById(String tableId);
-
     List<UserTableDTO> getTablesByUser();
 
-    List<UserTableDTO> getTablesByAddedUser();
-
+    List<UserTableDTO> getTablesByAssginedUser();
     List<UserTableDTO> getAllUsersTables();
 
     EUserTable validateUserTableOwnership(String tableId);

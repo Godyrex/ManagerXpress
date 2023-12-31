@@ -53,7 +53,7 @@ public class UserController {
 
     @GetMapping("/get-assigned-user-tables")
     public ResponseEntity<List<UserTableDTO>> getAllAssignedUserTables() {
-        List<UserTableDTO> userTables = userTableService.getTablesByAddedUser();
+        List<UserTableDTO> userTables = userTableService.getTablesByAssginedUser();
         return new ResponseEntity<>(userTables, HttpStatus.OK);
     }
 

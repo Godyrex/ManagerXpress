@@ -37,6 +37,14 @@ public class GlobalExceptionHandler {
         errorObject.setTimestamp(new Date());
         return new ResponseEntity<>(errorObject, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(AssignedUserNotFoundException.class)
+    public ResponseEntity<ErrorObject> handleAssignedUserNotFoundException(AssignedUserNotFoundException e, WebRequest webRequest) {
+        ErrorObject errorObject = new ErrorObject();
+        errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
+        errorObject.setMessage(e.getMessage());
+        errorObject.setTimestamp(new Date());
+        return new ResponseEntity<>(errorObject, HttpStatus.NOT_FOUND);
+    }
     @ExceptionHandler(InvalidTableException.class)
     public ResponseEntity<ErrorObject> handleInvalidTableException(InvalidTableException e, WebRequest webRequest) {
         ErrorObject errorObject = new ErrorObject();
@@ -48,6 +56,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RoleAlreadyAssignedException.class)
     public ResponseEntity<ErrorObject> handleRoleAlreadyAssignedException(RoleAlreadyAssignedException e, WebRequest webRequest) {
+
+        ErrorObject errorObject = new ErrorObject();
+        errorObject.setStatusCode(HttpStatus.CONFLICT.value());
+        errorObject.setMessage(e.getMessage());
+        errorObject.setTimestamp(new Date());
+        return new ResponseEntity<>(errorObject, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(UserAlreadyAssignedException.class)
+    public ResponseEntity<ErrorObject> handleUserAlreadyAssignedException(UserAlreadyAssignedException e, WebRequest webRequest) {
 
         ErrorObject errorObject = new ErrorObject();
         errorObject.setStatusCode(HttpStatus.CONFLICT.value());

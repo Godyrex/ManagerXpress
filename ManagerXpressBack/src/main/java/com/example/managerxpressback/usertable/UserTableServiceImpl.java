@@ -2,9 +2,13 @@ package com.example.managerxpressback.usertable;
 
 import com.example.managerxpressback.exceptions.InvalidTableException;
 import com.example.managerxpressback.exceptions.TableNotFoundException;
+import com.example.managerxpressback.exceptions.UserAlreadyAssignedException;
+import com.example.managerxpressback.exceptions.AssignedUserNotFoundException;
 import com.example.managerxpressback.security.services.UserDetailsImpl;
 import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,10 +41,13 @@ public class UserTableServiceImpl implements UserTableService {
     }
 
     @Override
+    @CacheEvict(value = "tables", key = "#userTableDTO.user()")
     public EUserTable createUserTable(UserTableDTO userTableDTO) {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
-        EUserTable eUserTable = new EUserTable(userTableDTO.tableName(),userTableDTO.columns());
+        EUserTable eUserTable = new EUserTable(userTableDTO.getTableName(),userTableDTO.getColumns());
         eUserTable.setIdUser(userDetails.getId());
+        List<String> users = new ArrayList<>();
+        eUserTable.setUsers(users);
         return userTableRepository.save(eUserTable);
     }
 
@@ -48,34 +55,21 @@ public class UserTableServiceImpl implements UserTableService {
     public EUserTable addUserToTable(String idUser, String idTable) {
         EUserTable eUserTable = validateUserTableOwnership(idTable);
 
-        if (eUserTable != null) {
-            if (eUserTable.getUsers() != null) {
                 if (!eUserTable.getUsers().contains(idUser)) {
                     eUserTable.getUsers().add(idUser);
                     return userTableRepository.save(eUserTable);
                 } else {
-                    return null;
+                    throw new UserAlreadyAssignedException("User already assigned to "+eUserTable.getTableName());
                 }
-            } else {
-                List<String> users = new ArrayList<>();
-                users.add(idUser);
-                eUserTable.setUsers(users);
-                return userTableRepository.save(eUserTable);
-            }
-        } else {
-            return null;
-        }
     }
 
     @Override
     public EUserTable removeUserFromTable(String idUser, String idTable) {
         EUserTable eUserTable = validateUserTableOwnership(idTable);
-
-        if (eUserTable != null) {
-            eUserTable.getUsers().remove(idUser);
+        if(eUserTable.getUsers().remove(idUser)) {
             return userTableRepository.save(eUserTable);
-        } else {
-            return null;
+        }else{
+            throw new AssignedUserNotFoundException("User already removed from "+eUserTable.getTableName());
         }
     }
 
@@ -83,11 +77,7 @@ public class UserTableServiceImpl implements UserTableService {
     @Override
     public UserTableDTO getUserTableById(String tableId) {
         EUserTable eUserTable = validateUserTableOwnership(tableId);
-        if (eUserTable != null) {
             return userTableDTOMapper.apply(eUserTable);
-        } else {
-            return null;
-        }
     }
 
     @Override
@@ -97,12 +87,13 @@ public class UserTableServiceImpl implements UserTableService {
     }
 
     @Override
-    public List<UserTableDTO> getTablesByAddedUser() {
+    public List<UserTableDTO> getTablesByAssginedUser() {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
         return userTableRepository.findUserTablesByUsersContaining(userDetails.getId()).stream().map(userTableDTOMapper).toList();
     }
 
     @Override
+    @Cacheable(value = "tables")
     public List<UserTableDTO> getAllUsersTables() {
         return userTableRepository.findAll().stream().map(userTableDTOMapper).toList();
     }
