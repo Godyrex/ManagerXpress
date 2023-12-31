@@ -1,9 +1,9 @@
 package com.example.managerxpressback.usertable;
 
+import com.example.managerxpressback.exceptions.AssignedUserNotFoundException;
 import com.example.managerxpressback.exceptions.InvalidTableException;
 import com.example.managerxpressback.exceptions.TableNotFoundException;
 import com.example.managerxpressback.exceptions.UserAlreadyAssignedException;
-import com.example.managerxpressback.exceptions.AssignedUserNotFoundException;
 import com.example.managerxpressback.security.services.UserDetailsImpl;
 import com.example.managerxpressback.security.services.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
