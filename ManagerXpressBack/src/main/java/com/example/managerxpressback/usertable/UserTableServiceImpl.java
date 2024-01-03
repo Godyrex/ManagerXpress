@@ -41,14 +41,20 @@ public class UserTableServiceImpl implements UserTableService {
     }
 
     @Override
-    @CacheEvict(value = "tables", key = "#userTableDTO.user()")
-    public EUserTable createUserTable(UserTableDTO userTableDTO) {
+    public EUserTable createUserTable(CreateTableDTO createTableDTO) {
         UserDetailsImpl userDetails = UserDetailsServiceImpl.getCurrentUserDetails();
-        EUserTable eUserTable = new EUserTable(userTableDTO.getTableName(),userTableDTO.getColumns());
+        EUserTable eUserTable = new EUserTable(createTableDTO.getTableName(),createTableDTO.getColumns());
         eUserTable.setIdUser(userDetails.getId());
         List<String> users = new ArrayList<>();
         eUserTable.setUsers(users);
         return userTableRepository.save(eUserTable);
+    }
+
+    @Override
+    public boolean deleteUserTable(String idTable) {
+        EUserTable eUserTable = validateUserTableOwnership(idTable);
+       userTableRepository.delete(eUserTable);
+            return true;
     }
 
     @Override

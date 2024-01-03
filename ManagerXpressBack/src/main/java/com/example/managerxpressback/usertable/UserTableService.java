@@ -3,7 +3,8 @@ package com.example.managerxpressback.usertable;
 import java.util.List;
 
 public interface UserTableService {
-    EUserTable createUserTable(UserTableDTO userTableDTO);
+    EUserTable createUserTable(CreateTableDTO createTableDTO);
+    boolean deleteUserTable(String idTable);
 
     EUserTable addUserToTable(String idUser, String idTable);
 

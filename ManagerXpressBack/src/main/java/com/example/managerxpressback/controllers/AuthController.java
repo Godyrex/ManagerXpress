@@ -9,6 +9,7 @@ import com.example.managerxpressback.security.services.UserDetailsImpl;
 import com.example.managerxpressback.user.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "*", maxAge = 3600, allowedHeaders ="*" )
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
@@ -83,5 +84,13 @@ public class AuthController {
         userRepository.save(eUser);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+    @PostMapping("/validate-token")
+    public ResponseEntity<MessageResponse> validateToken(@RequestBody String authToken) {
+    if(jwtUtils.validateJwtToken(authToken)){
+        return ResponseEntity.ok(new MessageResponse("Valid"));
+    }else{
+        return ResponseEntity.badRequest().body(new MessageResponse("Not Valid"));
+    }
     }
 }

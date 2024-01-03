@@ -1,1 +1,40 @@
-<p>dashboard works!</p>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+</head>
+<body>
+<div class="dashboard-container">
+  <nav class="sidebar">
+    <ul>
+      <li><a href="#your-tables">Your Tables</a></li>
+      <li><a href="#create-table">Create Table</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <header>
+      <h1>User Dashboard</h1>
+    </header>
+
+    <section class="dashboard-content">
+      <div id="your-tables" class="table-list">
+        <h2>Your Tables</h2>
+        <button routerLink="/create"  class="create-table-button">Create New Table</button>
+        <!-- Display user's tables here -->
+        <ul class="table-list-items">
+          <!-- Sample table item, repeat as needed -->
+          <li *ngFor="let table of userTables">
+            <button (click)="removeUserTable(table.idTable)" class="delete-table-button">&#x2716;</button>
+            <a href="#" class="table-item-link">
+              <span class="table-item-name">{{ table.tableName }}</span>
+            </a>
+          </li>
+          <!-- Add more table items dynamically -->
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+</body>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Table Request</title>
+</head>
+<body>
+<div class="container">
+  <form (ngSubmit)="createTable()" id="tableForm">
+    <h1>Create Table</h1>
+    <div *ngIf="messagehead" id="messageHead-container" class="messageHead-container">{{messagehead}}</div>
+    <div *ngIf="message" id="message-container" class="message-container">{{message}}</div>
+    <label for="tableName">Table Name:</label>
+    <input [(ngModel)]="tableRequest.tableName" type="text" id="tableName" name="tableName" required>
+
+    <!-- Repeat the following block for each column -->
+    <div class="column-container">
+      <div class="column">
+        <label for="columnName">Column Name:</label>
+        <input [(ngModel)]="columnName" type="text" id="columnName" name="columnName" required>
+      </div>
+      <div class="column">
+        <label for="columnType">Column Type:</label>
+        <input [(ngModel)]="columnType" type="text" id="columnType" name="columnType" required>
+      </div>
+    </div>
+
+
+    <button type="button" (click)="addColumn()">Add Column</button>
+    <button type="submit">Create Table</button>
+  </form>
+  <button routerLink="/dashboard">Go to Dashboard</button>
+
+</div>
+</body>
+</html>

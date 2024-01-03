@@ -9,6 +9,7 @@ public class UserTableDTOMapper implements Function<EUserTable, UserTableDTO> {
     @Override
     public UserTableDTO apply(EUserTable eUserTable) {
         return new UserTableDTO(
+                eUserTable.getIdTable(),
                 eUserTable.getIdUser(),
                 eUserTable.getTableName(),
                 eUserTable.getColumns(),

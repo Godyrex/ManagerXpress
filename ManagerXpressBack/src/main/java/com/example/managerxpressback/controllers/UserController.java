@@ -3,6 +3,7 @@ package com.example.managerxpressback.controllers;
 import com.example.managerxpressback.userdata.EUserData;
 import com.example.managerxpressback.userdata.UserDataDTO;
 import com.example.managerxpressback.userdata.UserDataService;
+import com.example.managerxpressback.usertable.CreateTableDTO;
 import com.example.managerxpressback.usertable.EUserTable;
 import com.example.managerxpressback.usertable.UserTableDTO;
 import com.example.managerxpressback.usertable.UserTableService;
@@ -28,8 +29,8 @@ public class UserController {
     private UserDataService userDataService;
 
     @PostMapping("/create-table")
-    public ResponseEntity<EUserTable> createUserTable(@Valid @RequestBody UserTableDTO userTableDTO) {
-        EUserTable createdTable = userTableService.createUserTable(userTableDTO);
+    public ResponseEntity<?> createUserTable(@Valid @RequestBody CreateTableDTO createTableDTO) {
+        EUserTable createdTable = userTableService.createUserTable(createTableDTO);
         return new ResponseEntity<>(createdTable, HttpStatus.CREATED);
     }
 
@@ -80,5 +81,13 @@ public class UserController {
     public ResponseEntity<List<UserDataDTO>> searchUserDataByTableName(@PathVariable String tableId, @PathVariable String data) {
         List<UserDataDTO> userDataList = userDataService.searchUserDataByTableIdAndData(tableId, data);
         return new ResponseEntity<>(userDataList, HttpStatus.OK);
+    }
+    @DeleteMapping("/removeTable/{idTable}")
+    public ResponseEntity<HttpStatus> removeUserTable(@PathVariable String idTable){
+        if(userTableService.deleteUserTable(idTable)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

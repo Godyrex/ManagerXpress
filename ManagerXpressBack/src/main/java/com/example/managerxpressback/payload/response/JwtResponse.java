@@ -1,14 +1,16 @@
 package com.example.managerxpressback.payload.response;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private String id;
     private String username;
     private String email;
-    private List<String> roles;
+    private final List<String> roles;
 
     public JwtResponse(String accessToken, String id, String username, String email, List<String> roles) {
         this.token = accessToken;

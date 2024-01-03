@@ -5,20 +5,27 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {RouterOutlet} from "@angular/router";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from "./app-routing.module";
+import {FormsModule} from "@angular/forms";
+import {authInterceptorProviders} from "./service/auth.interceptor";
+import { CreateComponent } from './dashboard/table/create/create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateComponent
   ],
     imports: [
         BrowserModule,
-        RouterOutlet
+      AppRoutingModule,
+      HttpClientModule,
+      FormsModule
     ],
-  providers: [],
+  providers: [HttpClient,authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

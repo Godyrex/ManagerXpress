@@ -7,13 +7,11 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserTableDTO implements Serializable {
-    String idTable;
-    String user;
+public class CreateTableDTO implements Serializable {
     String tableName;
     Map<String, String> columns;
-    List<String> Users;
 }
